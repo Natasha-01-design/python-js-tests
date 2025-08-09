@@ -4,7 +4,7 @@
 
 // Output: 2
 // NOTE: No number limit
-const numbers = [ 0,2,3,4,5,6];
+const numbers = [ 0,1,2,3];
 const n= numbers.length;
 const sumedNum= (n*(n+1))/2;
 const currentSum= numbers.reduce((sumed,current)=>sumed+current,0);
