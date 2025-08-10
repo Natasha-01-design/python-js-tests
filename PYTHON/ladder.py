@@ -1,14 +1,31 @@
-# # Word Ladder – Shortest Transformation Sequence
-# # Given two words, beginWord and endWord, and a dictionary of words wordList, 
-# # return the number of words in the shortest transformation sequence from beginWord
-# # to endWord, such that:
-# # Only one letter can be changed at a time.
-# # Each transformed word must exist in the word list.
-# Example:
-# Input:
-# beginWord = "hit"
-# endWord = "cog"
-#
+from collections import deque
 
-# Output: 5
+def ladderLength(beginWord, endWord, wordList):
+    wordSet = set(wordList)  
+    if endWord not in wordSet:
+        return 0 
+    
+    queue = deque([(beginWord, 1)]) 
 
+    while queue:
+        word, steps = queue.popleft()
+
+        if word == endWord:
+            return steps  
+        
+        
+        for i in range(len(word)):
+            for c in "abcdefghijklmnopqrstuvwxyz":
+                nextWord = word[:i] + c + word[i+1:]
+                if nextWord in wordSet:
+                    wordSet.remove(nextWord)  #visited
+                    queue.append((nextWord, steps + 1))
+    
+    return 0
+
+
+beginWord = "hit"
+endWord = "cog"
+wordList = ["hot", "dot", "dog", "lot", "log", "cog"]
+
+print(ladderLength(beginWord, endWord, wordList))  
